@@ -1,5 +1,8 @@
 # parallel_linear_algebra_cpp
 
+* Library for the use of fast linear algebra calculations by c++.
+* Implemented with the use of std::thread to accelerate the speed of matrix calculations.
+
 ### matrix.h
 * Now support(In parallel):
 * Matrix declaration:

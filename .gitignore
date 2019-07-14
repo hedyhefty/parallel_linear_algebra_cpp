@@ -31,5 +31,9 @@
 *.out
 *.app
 
-#xmls
+# xmls
 *.xml
+
+CMakeLists.txt
+
+cmake-build-debug

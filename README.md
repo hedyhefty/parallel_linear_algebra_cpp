@@ -35,5 +35,5 @@ auto mat_auto = mat_int - mat_double; //mat_auto will be matrix<double>({{-0.1,-
 ```
 matrix<int> mat_int({{1,2}});
 matrix<double> mat_double({{1.1,2.5}});
-auto mat_auto = mat_int * mat_double; //mat_auto will be matrix<double>({{5.6}}).
+auto mat_auto = mat_int * mat_double.transpose(); //mat_auto will be matrix<double>({{5.6}}).
 ```

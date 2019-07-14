@@ -4,7 +4,7 @@
 * Implemented with the use of std::thread to accelerate the speed of matrix calculations.
 
 ### matrix.h
-* Now support(In parallel):
+* Now supporting:
 * Matrix declaration:
 ```
 matrix<T> mat;

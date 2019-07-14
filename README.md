@@ -23,17 +23,17 @@ matrix<T> mat({{1,2}});
 ```
 matrix<int> mat_int({{1,2}});
 matrix<double> mat_double({{1.1,2.5}});
-auto mat_auto = mat_int + mat_double; //mat_auto will be matrix<double>({{2.1,4.5}}).
+mat_int + mat_double; //return matrix<double>({{2.1,4.5}}).
 ```
 * Matrix subtraction:
 ```
 matrix<int> mat_int({{1,2}});
 matrix<double> mat_double({{1.1,2.5}});
-auto mat_auto = mat_int - mat_double; //mat_auto will be matrix<double>({{-0.1,-0.5}}).
+mat_int - mat_double; //return matrix<double>({{-0.1,-0.5}}).
 ```
 * Matrix mulitplication:
 ```
 matrix<int> mat_int({{1,2}});
 matrix<double> mat_double({{1.1,2.5}});
-auto mat_auto = mat_int * mat_double.transpose(); //mat_auto will be matrix<double>({{5.6}}).
+mat_int * mat_double.transpose(); //return matrix<double>({{5.6}}).
 ```

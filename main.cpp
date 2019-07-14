@@ -9,6 +9,9 @@ int main() {
     matrix<double> m2({{3.5, 2.1, 1.2}});
     matrix<int> m4({{1, 2, 3}});
 
+    matrix<double> nn = m * m4.transpose();
+    cout << nn << endl;
+
     matrix<double> n = m;
     const matrix<int> mm = m;
 

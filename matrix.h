@@ -19,16 +19,7 @@ class matrix {
 public:
     T type_identifier = 1;
 
-    matrix(std::vector<std::vector<T>> &&mat) : elements(mat) {
-        m = elements.size();
-        if (m > 0) {
-            n = elements[0].size();
-        } else {
-            n = 0;
-        }
-    }
-
-    matrix(std::vector<std::vector<T>> &mat) : elements(mat) {
+    matrix(const std::vector<std::vector<T>> &mat) : elements(mat) {
         m = elements.size();
         if (m > 0) {
             n = elements[0].size();

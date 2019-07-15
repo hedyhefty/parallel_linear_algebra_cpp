@@ -1,13 +1,14 @@
 #include <iostream>
+#include <complex>
 #include "matrix.h"
 
 using namespace std;
 
 int main() {
-    matrix<int> m({{1, 2, 3},
-                   {2, 1, 4}});
-    matrix<double> m2({{3.5, 2.1, 1.2}});
-    matrix<int> m4({{1, 2, 3}});
+    matrix<int> m{{1, 2, 3},
+                  {2, 1, 4}};
+    matrix<double> m2{{3.5, 2.1, 1.2}};
+    matrix<int> m4{1, 2, 3};
 
     matrix<double> nn = m * m4.transpose();
     cout << nn << endl;
@@ -36,6 +37,17 @@ int main() {
     cout << m6 << "+" << m << "=";
     cout << m6 + m << endl;
     cout << m6 << "-" << m << "=" << m6 - m << endl;
+    complex<double> cp{2, 5};
+    matrix<complex<int>> cmat({{cp, 2}});
+    cout << "cmat" << cmat << endl;
+    cout << "cmatT" << cmat.transpose() << endl;
+    cout << "cmat^2" << cmat * cmat.transpose() << endl;
+
+    matrix<int> byinit{{1, 2},
+                       {3, 4}};
+    cout << byinit << endl;
+    matrix<double> bysginit{1.1, 2.2, -3.3};
+    cout << bysginit << endl;
 
     return 0;
 }

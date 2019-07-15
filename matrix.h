@@ -19,6 +19,38 @@ class matrix {
 public:
     T type_identifier = 1;
 
+    matrix(std::initializer_list<T> init) {
+        //std::cout << "sg_init_list constructor called." << std::endl;
+        m = 1;
+        n = init.size();
+        elements = std::vector<std::vector<T>>(m, std::vector<T>(n));
+
+        int i = 0;
+        for (auto r:init) {
+            elements[m - 1][i] = r;
+            ++i;
+        }
+    }
+
+    matrix(std::initializer_list<std::initializer_list<T>> init) {
+        std::cout << "init_list constructor called." << std::endl;
+        m = init.size();
+        n = init.begin()->size();
+        elements = std::vector<std::vector<T>>(m, std::vector<T>(n));
+
+        int i = 0;
+        int j = 0;
+        for (auto r:init) {
+            for (auto c:r) {
+                elements[i][j] = c;
+                ++j;
+            }
+            ++i;
+            j = 0;
+        }
+
+    }
+
     matrix(const std::vector<std::vector<T>> &mat) : elements(mat) {
         m = elements.size();
         if (m > 0) {
@@ -106,8 +138,9 @@ public:
         return *this * -1;
     }
 
-    std::vector<size_t> size() const {
-        return std::vector<size_t>{m, n};
+    const std::vector<const size_t> size() const {
+        const std::vector<const size_t> size_v{m, n};
+        return size_v;
     }
 
     bool isSingleton() {
@@ -271,5 +304,6 @@ template<typename Y, typename U>
 auto operator-(matrix<Y> m1, matrix<U> m2) -> matrix<decltype(m1.type_identifier - m2.type_identifier)> {
     return m1 + (-m2);
 }
+
 
 #endif //LINEARALGEBRALIB_MATRIX_H

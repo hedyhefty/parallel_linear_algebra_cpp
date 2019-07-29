@@ -38,7 +38,7 @@ int main() {
     cout << m6 + m << endl;
     cout << m6 << "-" << m << "=" << m6 - m << endl;
     complex<double> cp{2, 5};
-    matrix<complex<int>> cmat({{cp, 2}});
+    matrix<complex<int>> cmat{{cp, 2}};
     cout << "cmat" << cmat << endl;
     cout << "cmatT" << cmat.transpose() << endl;
     cout << "cmat^2" << cmat * cmat.transpose() << endl;
@@ -48,6 +48,14 @@ int main() {
     cout << byinit << endl;
     matrix<double> bysginit{1.1, 2.2, -3.3};
     cout << bysginit << endl;
+
+    matrix<int> rank_test{{1, 2, 3},
+                          {2, 4, 6},
+                          {1, 5, 7}};
+
+    int rankk = rank_test.getRank();
+
+    cout << "rank:" << rankk << endl;
 
     return 0;
 }

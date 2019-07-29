@@ -10,6 +10,7 @@
 #include <thread>
 #include <cmath>
 #include <exception>
+#include <algorithm>
 
 static unsigned int max_thread = std::thread::hardware_concurrency();
 
@@ -33,7 +34,7 @@ public:
     }
 
     matrix(std::initializer_list<std::initializer_list<T>> init) {
-        std::cout << "init_list constructor called." << std::endl;
+        //std::cout << "init_list constructor called." << std::endl;
         m = init.size();
         n = init.begin()->size();
         elements = std::vector<std::vector<T>>(m, std::vector<T>(n));
@@ -148,6 +149,60 @@ public:
             return true;
         }
         return false;
+    }
+
+    int getRank() {
+        std::vector<std::vector<double>> mhold(m, std::vector<double>(n, 0));
+        for (size_t i = 0; i < m; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                mhold[i][j] = elements[i][j];
+            }
+        }
+
+        int rank = m;
+
+        std::sort(mhold.begin(), mhold.end(), [](const std::vector<double> &a, const std::vector<double> &b) {
+            return a > b;
+        });
+
+        for (size_t i = 0; i < m - 1; ++i) {
+            int none_zero_index = i;
+            for (; none_zero_index < n; ++none_zero_index) {
+                if (mhold[i][none_zero_index] != 0) {
+                    break;
+                }
+            }
+
+            for (size_t j = i + 1; j < m; ++j) {
+                if (mhold[j][none_zero_index] == 0) {
+                    continue;
+                }
+                double factor = mhold[j][none_zero_index] / mhold[i][none_zero_index];
+                int count = 0;
+                for (size_t k = none_zero_index; k < n; ++k) {
+                    mhold[j][k] -= mhold[i][k] * factor;
+                    if (mhold[j][k] != 0) {
+                        ++count;
+                    }
+                }
+                if (count == 0) {
+                    --rank;
+                }
+            }
+
+            std::sort(mhold.begin(), mhold.end(), [](const std::vector<double> &a, const std::vector<double> &b) {
+                return a > b;
+            });
+        }
+
+//        for (auto &r: mhold) {
+//            for (auto &e: r) {
+//                std::cout << e << " ";
+//            }
+//            std::cout << std::endl;
+//        }
+
+        return rank;
     }
 
 private:
@@ -304,6 +359,5 @@ template<typename Y, typename U>
 auto operator-(matrix<Y> m1, matrix<U> m2) -> matrix<decltype(m1.type_identifier - m2.type_identifier)> {
     return m1 + (-m2);
 }
-
 
 #endif //LINEARALGEBRALIB_MATRIX_H
